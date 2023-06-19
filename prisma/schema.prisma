@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model task {
+model Task {
   id           String    @id @default(uuid())
   title        String    @db.VarChar(255)
   description  String    @db.VarChar(255)
@@ -21,14 +21,14 @@ model task {
   archived     Int       @default(0) @db.TinyInt
   creatorId    Int?
   categoryId   Int?
-  user         user?     @relation(fields: [creatorId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_task_user_id")
-  category     category? @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_task_category_id")
+  user         User?     @relation(fields: [creatorId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_task_user_id")
+  category     Category? @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_task_category_id")
 
   @@index([creatorId], map: "fk_task_user_id")
   @@index([categoryId], map: "fk_task_category_id")
 }
 
-model user {
+model User {
   id           Int       @id @default(autoincrement())
   firstName    String    @db.VarChar(255)
   lastName     String    @db.VarChar(255)
@@ -38,14 +38,14 @@ model user {
   isActive     Int       @default(1) @db.TinyInt
   date_created DateTime  @default(now()) @db.DateTime(0)
   date_updated DateTime? @db.DateTime(0)
-  task         task[]
+  task         Task[]
 }
 
-model category {
+model Category {
   id           Int       @id @default(autoincrement())
   title        String    @db.VarChar(255)
   isActive     Int       @default(1) @db.TinyInt
   date_created DateTime  @default(now()) @db.DateTime(0)
   date_updated DateTime? @db.DateTime(0)
-  task         task[]
+  task         Task[]
 }
