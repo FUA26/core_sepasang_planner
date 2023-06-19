@@ -26,7 +26,7 @@ export class JwtAuthStrategy extends PassportStrategy(
   }
 
   async validate(request: Request, payload: any) {
-    // console.log('validate', payload);
+    console.log('validate', payload);
     if (payload === null) {
       throw new UnauthorizedException();
     }

@@ -29,7 +29,6 @@ export class JwtRefreshStrategy extends PassportStrategy(
   }
 
   async validate(request: Request, payload: any) {
-    //console.log(request?.cookies['RefreshToken'], payload);
     if (!payload) {
       throw new BadRequestException('invalid jwt token');
     }
