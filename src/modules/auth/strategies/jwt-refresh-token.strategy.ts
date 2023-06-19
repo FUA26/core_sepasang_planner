@@ -20,7 +20,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
       secretOrKey: configService.get('auth.secret'),
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
-          // console.log(request?.cookies?.['RefreshToken']);
+          //console.log(request?.cookies?.['RefreshToken']);
           // eslint-disable-next-line prettier/prettier
           return request?.cookies?.['RefreshToken'];
         },
@@ -29,7 +29,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
   }
 
   async validate(request: Request, payload: any) {
-    // console.log(request?.cookies['RefreshToken'], payload);
+    //console.log(request?.cookies['RefreshToken'], payload);
     if (!payload) {
       throw new BadRequestException('invalid jwt token');
     }
