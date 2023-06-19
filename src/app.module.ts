@@ -6,13 +6,14 @@ import { AuthModule } from './modules/auth/auth.module';
 import { TaskModule } from './modules/task/task.module';
 import { CategoryModule } from './modules/category/category.module';
 import appConfig from './configs/app.config';
+import authConfig from './configs/auth.config';
 
 @Module({
   imports: [
     PrismaModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [appConfig],
+      load: [appConfig, authConfig],
       envFilePath: ['.env'],
     }),
     UserModule,
