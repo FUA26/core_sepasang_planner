@@ -1,15 +1,33 @@
 import { Injectable } from '@nestjs/common';
+import { Category } from '@prisma/client';
+import { PrismaService } from 'prisma/prisma.service';
+import { PaginatedDto, PaginationMeta } from 'src/utils/dto/response.dto';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoryService {
+  constructor(private prisma: PrismaService) {}
   create(createCategoryDto: CreateCategoryDto) {
     return 'This action adds a new category';
   }
 
-  findAll() {
-    return `This action returns all category`;
+  async findAll(paginationQuery, queryParams): Promise<any> {
+    const count = await this.prisma.category.count();
+
+    const datas = await this.prisma.category.findMany({
+      orderBy: {
+        [queryParams.sort]: queryParams.order,
+      },
+
+      take: paginationQuery.end,
+      skip: paginationQuery.start,
+    });
+    return { count, datas };
+  }
+
+  async allList(): Promise<any> {
+    return await this.prisma.category.findMany();
   }
 
   findOne(id: number) {
