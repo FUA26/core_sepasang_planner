@@ -1,5 +1,5 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsNotEmpty, IsOptional, IsPositive, IsString } from 'class-validator';
 
 export class requestPaginated {
   @ApiPropertyOptional({ required: false })
@@ -7,15 +7,13 @@ export class requestPaginated {
   @IsString()
   keyword?: string;
 
-  @ApiPropertyOptional({ required: false })
-  @IsOptional()
-  @ApiPropertyOptional({ default: 1 }) // Tambahkan default value
-  page?: number;
+  @ApiProperty({ default: 1 }) // Tambahkan default value
+  @IsNotEmpty()
+  page: number;
 
-  @ApiPropertyOptional({ required: false })
-  @IsOptional()
-  @ApiPropertyOptional({ default: 10 }) // Tambahkan default value
-  record?: number;
+  @ApiProperty({ default: 10 })
+  @IsNotEmpty()
+  record: number;
 
   @ApiPropertyOptional({ required: false })
   @IsOptional()
