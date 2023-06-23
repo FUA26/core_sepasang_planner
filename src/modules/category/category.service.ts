@@ -13,6 +13,7 @@ export class CategoryService {
   }
 
   async findAll(paginationQuery, queryParams): Promise<any> {
+    console.log(paginationQuery);
     const count = await this.prisma.category.count();
 
     const datas = await this.prisma.category.findMany({

@@ -39,7 +39,6 @@ export class CategoryController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all categories' })
   @ApiResponse({ status: 200, description: 'OK' })
   async findAll(@Query() query: requestPaginated) {
     const paginationQuery = StartEndHelper(query.record, query.page);
