@@ -1,0 +1,11 @@
+GET http://localhost:3200/task?page=1&record=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImZpcmR0TmFtZSI6IkpvaG4iLCJsYXN0TmFtZSI6IkRvZSIsImVtYWlsIjoidGVzdDFAZXhhbXBsZS5jb20iLCJpYXQiOjE2ODc0OTQwMzYsImV4cCI6MTY4NzQ5NDkzNn0.giRvq6cBH8UWL2EmZ_khPYhsCY250kPHy-y70TXpSuc
+
+###
+POST http://localhost:3200/auth/login
+Content-Type: application/json
+
+{
+  "email": "test1@example.com",
+  "password": "string"
+}
