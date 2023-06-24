@@ -5,9 +5,9 @@ WORKDIR /app
 
 # Copy package files and dependencies
 COPY package*.json ./
-
+COPY prisma ./prisma/
 # Install app dependencies
-RUN npm install --production
+RUN npm install
 
 # Copy rest of the code
 COPY . .
@@ -21,7 +21,9 @@ FROM node:14
 WORKDIR /app
 
 # Copy built app from the previous stage
-COPY --from=builder /app .
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/dist ./dist
 
 # Install production dependencies only
 RUN npm install --production
