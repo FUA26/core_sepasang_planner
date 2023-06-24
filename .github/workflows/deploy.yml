@@ -20,5 +20,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -f prod.Dockerfile -t ghcr.io/${{ github.repository_owner | toLowerCase() }}/${{ github.repository_name }}:latest -t ghcr.io/${{ github.repository_owner | toLowerCase() }}/${{ github.repository_name }}:${{ github.ref }} .
-          docker push ghcr.io/${{ github.repository_owner | toLowerCase() }}/${{ github.repository_name }} --all-tags
+          docker build -f prod.Dockerfile -t ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}:latest -t ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}:${{ github.ref }} .
+          docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }} --all-tags
