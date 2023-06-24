@@ -24,5 +24,5 @@ jobs:
           REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           REPO_NAME=$(echo "${{ github.repository_name }}" | tr '[:upper:]' '[:lower:]')
           TAG_NAME=$(echo "${{ github.ref }}" | sed -e "s|refs/heads/||" | tr '/' '-')
-          docker build -f prod.Dockerfile -t ${REPO_NAME}:latest -t ${REPO_NAME}:${TAG_NAME} .
-          docker push ${REPO_NAME} --all-tags
+          docker build -f prod.Dockerfile --tag hello:latest .
+          docker push hello --all-tags
