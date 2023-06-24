@@ -1,5 +1,4 @@
 name: Build and Test
-
 on:
   push:
     branches:
@@ -12,18 +11,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Login to GitHub Container Registry
+     name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up Docker Compose
-        uses: docker/compose-cli-action@v0.9.0
-
       - name: Build and push Docker image
         run: |
-          export DOCKER_BUILDKIT=1
-          docker-compose -f docker-compose.prod.yml build
-          docker-compose -f docker-compose.prod.yml push
+          docker build -f prod.Dockerfile -t ghcr.io/${{ github.repository_owner | toLowerCase() }}/${{ github.repository_name }}:latest -t ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}:${{ github.ref }} .
+          docker push ghcr.io/${{ github.repository_owner | toLowerCase() }}/${{ github.repository_name }} --all-tags
