@@ -26,5 +26,6 @@ jobs:
           export DOCKER_BUILDKIT=1
           REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           TAG_NAME=$(echo "${{ github.ref }}" | sed -e "s|refs/heads/||" | tr '/' '-')
+          REPO_NAME=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           docker build -f prod.Dockerfile -t ghcr.io/${REPO_OWNER}/${REPO_NAME}:latest .
           docker push ghcr.io/${REPO_OWNER}/${REPO_NAME} --all-tags
