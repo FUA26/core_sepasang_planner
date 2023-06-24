@@ -17,12 +17,14 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Extract repository name
+        run: |
+          REPO_NAME=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "Repository Name: $REPO_NAME"
       - name: Build and push Docker image
         run: |
           export DOCKER_BUILDKIT=1
           REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          REPO_NAME=$(echo "${{ github.repository_name }}" | tr '[:upper:]' '[:lower:]')
           TAG_NAME=$(echo "${{ github.ref }}" | sed -e "s|refs/heads/||" | tr '/' '-')
-          docker build -f prod.Dockerfile --tag hello:latest .
-          docker push hello --all-tags
+          docker build -f prod.Dockerfile -t ghcr.io/${REPO_OWNER}/${REPO_NAME}:latest .
+          docker push ghcr.io/${REPO_OWNER}/${REPO_NAME} --all-tags
