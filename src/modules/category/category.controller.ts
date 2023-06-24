@@ -8,7 +8,7 @@ import {
   Delete,
   Query,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Category } from '@prisma/client';
 import { NextPrevHelper, StartEndHelper } from 'src/helper/pagination.helper';
 import { requestPaginated } from 'src/utils/dto/requestPaginated.dto';

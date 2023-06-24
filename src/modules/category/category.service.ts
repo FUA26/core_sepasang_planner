@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Category } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
-import { PaginatedDto, PaginationMeta } from 'src/utils/dto/response.dto';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
