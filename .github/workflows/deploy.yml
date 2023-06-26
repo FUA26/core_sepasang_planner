@@ -36,6 +36,6 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}'cd /app/core_sepasang_planner && docker-compose -f docker-compose.prod.yml pull'
-            ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}'cd /app/core_sepasang_planner && docker-compose -f docker-compose.prod.yml down'
-            ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}'cd /app/core_sepasang_planner && docker-compose -f docker-compose.prod.yml up -d --build'
+            ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} 'cd /app/core_sepasang_planner && docker-compose -f docker-compose.prod.yml pull'
+            ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} 'cd /app/core_sepasang_planner && docker-compose -f docker-compose.prod.yml down'
+            ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} 'cd /app/core_sepasang_planner && docker-compose -f docker-compose.prod.yml up -d --build'
