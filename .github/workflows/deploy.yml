@@ -29,3 +29,13 @@ jobs:
           REPO_NAME=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           docker build -f prod.Dockerfile -t ghcr.io/${REPO_OWNER}/${REPO_NAME}:latest .
           docker push ghcr.io/${REPO_OWNER}/${REPO_NAME} --all-tags
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}'cd /app/core_sepasang_planner && docker-compose -f docker-compose.prod.yml pull'
+            ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}'cd /app/core_sepasang_planner && docker-compose -f docker-compose.prod.yml down'
+            ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}'cd /app/core_sepasang_planner && docker-compose -f docker-compose.prod.yml up -d --build'

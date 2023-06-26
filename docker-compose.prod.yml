@@ -1,9 +1,7 @@
 version: '3'
 services:
   core-sp:
-    build:
-      context: .
-      dockerfile: prod.Dockerfile
+    image: ghcr.io/fua26/core_sepasang_planner:latest
     container_name: core-sp
     restart: always
     ports:
