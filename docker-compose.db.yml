@@ -1,0 +1,24 @@
+version: '3'
+services:
+  sp-db:
+    image: mysql:8
+    container_name: sp-db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      SERVICE_NAME: mysql
+    ports:
+      - 3306:3306
+    env_file:
+      - dev.env
+    volumes:
+      - sp-database:/var/lib/mysql
+    networks:
+      - sp-networks
+
+networks:
+  sp-networks:
